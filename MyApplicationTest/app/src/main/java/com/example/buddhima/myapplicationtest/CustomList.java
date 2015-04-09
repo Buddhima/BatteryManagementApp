@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * Class to represent a customized single list-item in locations list
+ */
 public class CustomList extends ArrayAdapter<String> {
 
     private final String[] address, cordinates, info;

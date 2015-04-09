@@ -56,9 +56,10 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_locations) {
+//        if (id == R.id.action_settings) {
+//            return true;
+//        } else
+        if (id == R.id.action_locations) {
             // Switch to location list page
             Intent intent = new Intent(this, LocationListActivity.class);
             startActivity(intent);

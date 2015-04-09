@@ -7,7 +7,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADDRESS"
-        android:id="@+id/addressTextView" />
+        android:id="@+id/addressTextView"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"

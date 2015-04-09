@@ -1,12 +1,17 @@
 package com.example.buddhima.myapplicationtest;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.BatteryManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -16,6 +21,23 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setBatteryLevel();
+    }
+
+    /**
+     * Set the current battery-level
+     */
+    private void setBatteryLevel() {
+        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = getBaseContext().registerReceiver(null, ifilter);
+        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+
+        ProgressBar batteryBar = (ProgressBar)findViewById(R.id.batteryBar);
+        TextView progressText  = (TextView)findViewById(R.id.progressText);
+
+        batteryBar.setProgress(level);
+        progressText.setText(level + "%");
     }
 
 
@@ -36,6 +58,10 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_locations) {
+            // Switch to location list page
+            Intent intent = new Intent(this, LocationListActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

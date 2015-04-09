@@ -29,9 +29,14 @@
             android:enabled="true"
             android:exported="true" >
             <intent-filter>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"></action>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".LocationListActivity"
+            android:label="@string/title_activity_location_list" >
+        </activity>
     </application>
 
 </manifest>

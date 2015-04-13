@@ -37,6 +37,14 @@
             android:name=".LocationListActivity"
             android:label="@string/title_activity_location_list" >
         </activity>
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.buddhima.myapplicationtest.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

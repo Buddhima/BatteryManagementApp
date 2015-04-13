@@ -6,5 +6,34 @@
     <string name="action_settings">Settings</string>
     <string name="action_locations">Locations</string>
     <string name="title_activity_location_list">Locations</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!--Settings Activity Strings-->
+    <string name="settings_name">Plan</string>
+    <string name="settings_section1_name">Phase 01</string>
+    <string name="settings_section2_name">Phase 02</string>
+    <string name="settings_section3_name">Phase 03</string>
+
+    <string name="settings_section1_action1">Action 01</string>
+    <string name="settings_section1_action2">Action 02</string>
+    <string name="settings_section1_action3">Action 03</string>
+    <string name="settings_section1_action4">Action 04</string>
+    <string name="settings_section1_action5">Action 05</string>
+    <string name="settings_section1_action6">Action 06</string>
+
+    <string name="settings_section2_action1">Action 01</string>
+    <string name="settings_section2_action2">Action 02</string>
+    <string name="settings_section2_action3">Action 03</string>
+    <string name="settings_section2_action4">Action 04</string>
+    <string name="settings_section2_action5">Action 05</string>
+    <string name="settings_section2_action6">Action 06</string>
+
+    <string name="settings_section3_action1">Action 01</string>
+    <string name="settings_section3_action2">Action 02</string>
+    <string name="settings_section3_action3">Action 03</string>
+    <string name="settings_section3_action4">Action 04</string>
+    <string name="settings_section3_action5">Action 05</string>
+    <string name="settings_section3_action6">Action 06</string>
+
 
 </resources>

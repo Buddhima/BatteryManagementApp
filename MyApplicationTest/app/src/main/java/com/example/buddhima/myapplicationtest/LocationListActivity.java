@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
 
 public class LocationListActivity extends ActionBarActivity {
@@ -25,7 +24,7 @@ public class LocationListActivity extends ActionBarActivity {
         fillLocationDetails();
 
         // Set new adaptor for the list view
-        CustomList adapter = new CustomList(LocationListActivity.this, address, cordinates, info);
+        CustomListLocation adapter = new CustomListLocation(LocationListActivity.this, address, cordinates, info);
 
         locationList = (ListView)findViewById(R.id.listView);
         locationList.setAdapter(adapter);

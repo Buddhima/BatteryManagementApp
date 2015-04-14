@@ -11,12 +11,12 @@ import android.widget.TextView;
 /**
  * Class to represent a customized single list-item in locations list
  */
-public class CustomList extends ArrayAdapter<String> {
+public class CustomListLocation extends ArrayAdapter<String> {
 
     private final String[] address, cordinates, info;
     private final Activity context;
 
-    public CustomList(Activity context, String[] address, String[] cordinates, String[] info) {
+    public CustomListLocation(Activity context, String[] address, String[] cordinates, String[] info) {
         super(context, R.layout.location_list_item, address);
 
         this.address    = address;

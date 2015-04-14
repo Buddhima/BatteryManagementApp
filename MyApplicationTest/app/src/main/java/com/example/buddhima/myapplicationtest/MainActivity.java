@@ -14,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.buddhima.myapplicationtest.settings.SettingsActivity;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -82,5 +84,11 @@ public class MainActivity extends ActionBarActivity {
                         Toast.LENGTH_SHORT).show();
             } while (c.moveToNext());
         }
+    }
+
+    //suneth : open the settings activity
+    public void openSettings(View view){
+        Intent settingsIntent = new Intent(this, SettingsActivity.class);
+        startActivity(settingsIntent);
     }
 }

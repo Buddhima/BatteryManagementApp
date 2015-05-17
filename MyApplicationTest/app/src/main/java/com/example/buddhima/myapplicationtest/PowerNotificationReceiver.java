@@ -75,7 +75,7 @@ public class PowerNotificationReceiver extends BroadcastReceiver {
 
             Uri uri = context.getContentResolver().insert(LocationProvider.CONTENT_URI, values);
 
-            Toast.makeText(context, uri.toString(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, uri.toString(), Toast.LENGTH_LONG).show();
 
         }
     }

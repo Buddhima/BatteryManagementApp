@@ -13,6 +13,7 @@ public class GPSDataProvider {
     GoogleApiClient client;
     Location location;
 
+    GPSDataProvider(){}
     /*
     It is assumed that this will get a LocationClient
      */
@@ -49,7 +50,7 @@ public class GPSDataProvider {
 
 
 
-    private class GeodataCalculator {
+    public class GeodataCalculator {
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::                                                                         :*/
 /*::  This routine calculates the distance between two points (given the     :*/

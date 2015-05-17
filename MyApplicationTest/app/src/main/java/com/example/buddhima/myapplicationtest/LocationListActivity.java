@@ -1,5 +1,6 @@
 package com.example.buddhima.myapplicationtest;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class LocationListActivity extends ActionBarActivity {
@@ -33,8 +35,8 @@ public class LocationListActivity extends ActionBarActivity {
 
     private void fillLocationDetails() {
         // Retrieve student records
-        String URL = "content://com.example.provider.AndroidApp/locations";
-        Uri locations = Uri.parse(URL);
+//        String URL = "content://com.example.provider.AndroidApp/locations";
+        Uri locations = Uri.parse(LocationProvider.URL);
         Cursor c = managedQuery(locations, null, null, null, "address");
 
         address    = new String[c.getCount()];
@@ -48,9 +50,10 @@ public class LocationListActivity extends ActionBarActivity {
             do{
                 address[index] = c.getString(c.getColumnIndex(LocationProvider.ADDRESS));
                 cordinates[index] = c.getString(c.getColumnIndex(LocationProvider.LATITUDE)) + " , " + c.getString(c.getColumnIndex(LocationProvider.LONGITUDE));
-                info[index] = "You've charged " + c.getString(c.getColumnIndex(LocationProvider.COUNT)) + " times there";
+                info[index] = "You've charged " + c.getString(c.getColumnIndex(LocationProvider.COUNT)) + " times there \n";
+                info[index] += "Last charged on " + c.getString(c.getColumnIndex(LocationProvider.LAST_CHARGED));
 
-                index ++;
+                        index ++;
 
             } while (c.moveToNext());
         }
@@ -75,7 +78,21 @@ public class LocationListActivity extends ActionBarActivity {
 //        if (id == R.id.action_settings) {
 //            return true;
 //        }
+        if (id == R.id.action_clear_location_list) {
+            Toast.makeText(this.getBaseContext(), "Clearing data", Toast.LENGTH_SHORT ).show();
+            clearLocationsList();
+
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void clearLocationsList() {
+        int result = this.getContentResolver().delete(LocationProvider.CONTENT_URI, null, null);
     }
 }

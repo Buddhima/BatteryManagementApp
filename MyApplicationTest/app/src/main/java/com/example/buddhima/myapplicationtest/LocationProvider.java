@@ -26,6 +26,7 @@ public class LocationProvider extends ContentProvider {
     static final String LONGITUDE = "longitude";
     static final String LATITUDE = "latitude";
     static final String COUNT = "count";
+    static final String LAST_CHARGED = "last_charged";
 
     private static HashMap<String, String> LOCATIONS_PROJECTION_MAP;
 
@@ -53,7 +54,8 @@ public class LocationProvider extends ContentProvider {
                     " address TEXT NOT NULL, " +
                     " longitude TEXT NOT NULL, " +
                     " latitude TEXT NOT NULL, " +
-                    " count INTEGER NOT NULL);";
+                    " count INTEGER NOT NULL," +
+                    " last_charged TEXT NOT NULL);";
 // address, longitude, latitude, count
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
@@ -64,6 +66,7 @@ public class LocationProvider extends ContentProvider {
         }
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
             sqLiteDatabase.execSQL(CREATE_DB_TABLE);
         }
 

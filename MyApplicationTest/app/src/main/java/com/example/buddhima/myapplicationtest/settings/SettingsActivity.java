@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.example.buddhima.myapplicationtest.R;
 
+//suneth
 public class SettingsActivity extends ActionBarActivity {
 
     @Override

@@ -22,6 +22,7 @@ public class SettingsActivity extends ActionBarActivity {
     BluetoothController bluetoothController;
     WiFiController wiFiController;
     AutoSyncController autoSyncController;
+    ScreenTimeoutController screenTimeoutController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class SettingsActivity extends ActionBarActivity {
         bluetoothController = new BluetoothController();
         wiFiController = new WiFiController();
         autoSyncController = new AutoSyncController();
+        screenTimeoutController = new ScreenTimeoutController();
 
     }
 
@@ -98,7 +100,8 @@ public class SettingsActivity extends ActionBarActivity {
         actionListContext.setPhase1Active(sw.isChecked());
 
         //testing
-        bluetoothController.disableBluetooth();
+        //bluetoothController.disableBluetooth();
+        screenTimeoutController.setTimeout(getContentResolver(),0);
 
 
 

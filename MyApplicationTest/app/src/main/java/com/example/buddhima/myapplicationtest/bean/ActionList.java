@@ -7,14 +7,14 @@ import java.util.ArrayList;
  */
 public class ActionList {
     private ArrayList<Action> phaseActions;
-    private String[] actionArr;
+    private ArrayList<String> actionList;
     private String name;
     private int phase;
     private boolean checked;
 
 
-    public ActionList(int phase, String[] actionArr) {
-        this.actionArr = actionArr;
+    public ActionList(int phase, ArrayList<String> actionList) {
+        this.actionList = actionList;
         this.phase = phase;
         this.name = "Phase" + phase;
         createPhaseActions();
@@ -23,16 +23,24 @@ public class ActionList {
 
     private void createPhaseActions() {
 
-        if (actionArr == null)
+        if (actionList == null)
             return;
 
         phaseActions = new ArrayList<Action>();
-        for (int i = 0; i < actionArr.length; i++) {
-            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + actionArr[i]);
-            Action action = new Action(phase, i, actionArr[i]);
+        for (int i = 0; i < actionList.size(); i++) {
+            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + actionList.get(i));
+            Action action = new Action(phase, i, actionList.get(i));
             phaseActions.add(action);
 
         }
+    }
+
+    public int getSize(){
+        return phaseActions.size();
+    }
+
+    public Action getAction(int i){
+        return phaseActions.get(i);
     }
 
 

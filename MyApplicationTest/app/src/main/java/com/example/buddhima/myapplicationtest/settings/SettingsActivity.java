@@ -5,16 +5,37 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckedTextView;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import com.example.buddhima.myapplicationtest.R;
+import com.example.buddhima.myapplicationtest.bean.ActionListContext;
 
 //suneth
 public class SettingsActivity extends ActionBarActivity {
+
+    ActionListContext actionListContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        //create actionListContext
+        LinearLayout layoutPhase1 = (LinearLayout) findViewById(R.id.linearPhase1);
+        LinearLayout layoutPhase2 = (LinearLayout) findViewById(R.id.linearPhase2);
+        actionListContext = new ActionListContext(layoutPhase1, layoutPhase2);
+
+
+        Switch sw1 = (Switch) findViewById(R.id.switchPhase1);
+        Switch sw2 = (Switch) findViewById(R.id.switchPhase2);
+
+        actionListContext.setPhase1Active(sw1.isChecked());
+        actionListContext.setPhase2Active(sw2.isChecked());
+//        actionListContext.updateActionContext(layoutPhase1, layoutPhase2);
+        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
     }
 
 
@@ -40,8 +61,29 @@ public class SettingsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onCheckboxClicked(View view){
+    public void onCheckboxClicked(View view) {
         System.out.println("Clicked");
+        CheckedTextView ctv = (CheckedTextView) view;
+        String actionName = ctv.getText().toString();
+        System.out.println("<<<<<<<<<<<<<<<<<<<<" + actionName);
 
+        if (ctv.isChecked())
+            ctv.setChecked(false);
+
+        else
+            ctv.setChecked(true);
+
+        actionListContext.setActionStatus(actionName, ctv.isChecked());
+
+    }
+    public void onSwitchPhase1Clicked(View view) {
+        Switch sw = ((Switch)view);
+        actionListContext.setPhase1Active(sw.isChecked());
+
+    }
+
+    public void onSwitchPhase2Clicked(View view) {
+        Switch sw = ((Switch)view);
+        actionListContext.setPhase2Active(sw.isChecked());
     }
 }

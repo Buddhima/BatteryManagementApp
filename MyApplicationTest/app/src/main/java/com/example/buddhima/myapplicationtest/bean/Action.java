@@ -17,6 +17,7 @@ public class Action {
         this.id = id;
         this.name = name;
         this.elementId = "cb_" + phase + "_" + id;
+        this.checked = false;
     }
 
     public int getId() {

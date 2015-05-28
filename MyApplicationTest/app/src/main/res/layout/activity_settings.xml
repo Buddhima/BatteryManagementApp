@@ -57,17 +57,18 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <Switch
-                        android:id="@+id/sw_sec1"
+                        android:id="@+id/switchPhase1"
                         android:layout_width="96dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignTop="@+id/tv_sec1"
-                        android:layout_toLeftOf="@+id/tv_sec1" />
+                        android:layout_toLeftOf="@+id/tv_sec1"
+                        android:onClick="onSwitchPhase1Clicked"/>
 
 
                     <LinearLayout
-                        android:id="@+id/linear1"
+                        android:id="@+id/linearPhase1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_sec1"
@@ -139,17 +140,18 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <Switch
-                        android:id="@+id/sw_sec2"
+                        android:id="@+id/switchPhase2"
                         android:layout_width="96dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignTop="@+id/tv_sec2"
-                        android:layout_toLeftOf="@+id/tv_sec2" />
+                        android:layout_toLeftOf="@+id/tv_sec2"
+                        android:onClick="onSwitchPhase2Clicked"/>
 
 
                     <LinearLayout
-                        android:id="@+id/linear2"
+                        android:id="@+id/linearPhase2"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_sec2"
@@ -189,88 +191,6 @@
                             android:gravity="center_vertical"
                             android:onClick="onCheckboxClicked"
                             android:text="@string/settings_section2_action3" />
-                    </LinearLayout>
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/border3"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/border2"
-                android:layout_marginTop="@dimen/settings_top_spacing1"
-                android:background="@drawable/border"
-                android:orientation="vertical">>
-
-                <RelativeLayout
-                    android:id="@+id/relative3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/settings_padding"
-                    android:paddingLeft="@dimen/settings_padding"
-                    android:paddingRight="@dimen/settings_padding"
-                    android:paddingTop="@dimen/settings_padding">
-
-                    <TextView
-                        android:id="@+id/tv_sec3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/settings_padding"
-                        android:text="@string/settings_section3_name"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <Switch
-                        android:id="@+id/sw_sec3"
-                        android:layout_width="96dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignTop="@+id/tv_sec3"
-                        android:layout_toLeftOf="@+id/tv_sec3" />
-
-
-                    <LinearLayout
-                        android:id="@+id/linear3"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_sec3"
-                        android:layout_marginLeft="@dimen/settings_left_spacing1"
-                        android:layout_marginTop="@dimen/settings_top_spacing1"
-                        android:orientation="vertical">
-
-                        <CheckedTextView
-                            android:id="@+id/cb_s3a1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                            android:checked="false"
-                            android:clickable="true"
-                            android:gravity="center_vertical"
-                            android:onClick="onCheckboxClicked"
-                            android:text="@string/settings_section2_action1" />
-
-                        <CheckedTextView
-                            android:id="@+id/cb_s3a2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                            android:checked="true"
-                            android:clickable="true"
-                            android:gravity="center_vertical"
-                            android:onClick="onCheckboxClicked"
-                            android:text="@string/settings_section3_action2" />
-
-                        <CheckedTextView
-                            android:id="@+id/cb_s3a3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                            android:checked="true"
-                            android:clickable="true"
-                            android:gravity="center_vertical"
-                            android:onClick="onCheckboxClicked"
-                            android:text="@string/settings_section3_action3" />
                     </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>

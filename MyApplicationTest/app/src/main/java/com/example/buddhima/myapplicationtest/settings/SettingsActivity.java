@@ -20,6 +20,7 @@ public class SettingsActivity extends ActionBarActivity {
     //Controllers
     BrightnessController brightnessController;
     BluetoothController bluetoothController;
+    WiFiController wiFiController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class SettingsActivity extends ActionBarActivity {
         //controllers
         brightnessController = new BrightnessController(getContentResolver());
         bluetoothController = new BluetoothController();
+        wiFiController = new WiFiController();
 
     }
 
@@ -96,10 +98,15 @@ public class SettingsActivity extends ActionBarActivity {
         //testing
         bluetoothController.disableBluetooth();
 
+
+
     }
 
     public void onSwitchPhase2Clicked(View view) {
         Switch sw = ((Switch) view);
         actionListContext.setPhase2Active(sw.isChecked());
+
+        //test
+        wiFiController.disableWiFi(this);
     }
 }

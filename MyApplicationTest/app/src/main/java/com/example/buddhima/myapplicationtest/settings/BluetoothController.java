@@ -13,4 +13,11 @@ public class BluetoothController {
             mBluetoothAdapter.disable();
         }
     }
+
+    public void enableBluetooth(){
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (!mBluetoothAdapter.isEnabled()) {
+            mBluetoothAdapter.enable();
+        }
+    }
 }

@@ -19,6 +19,7 @@ public class SettingsActivity extends ActionBarActivity {
 
     //Controllers
     BrightnessController brightnessController;
+    BluetoothController bluetoothController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class SettingsActivity extends ActionBarActivity {
 
         //controllers
         brightnessController = new BrightnessController(getContentResolver());
+        bluetoothController = new BluetoothController();
 
     }
 
@@ -81,13 +83,18 @@ public class SettingsActivity extends ActionBarActivity {
 
         actionListContext.setActionStatus(actionName, ctv.isChecked());
 
+        //testing
         brightnessController.setBrightness(getWindow(), getContentResolver(), brightnessController.getBrightness(getContentResolver()) + 25);
 
     }
 
     public void onSwitchPhase1Clicked(View view) {
+
         Switch sw = ((Switch) view);
         actionListContext.setPhase1Active(sw.isChecked());
+
+        //testing
+        bluetoothController.disableBluetooth();
 
     }
 

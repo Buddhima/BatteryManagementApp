@@ -21,6 +21,7 @@ public class SettingsActivity extends ActionBarActivity {
     BrightnessController brightnessController;
     BluetoothController bluetoothController;
     WiFiController wiFiController;
+    AutoSyncController autoSyncController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class SettingsActivity extends ActionBarActivity {
         brightnessController = new BrightnessController(getContentResolver());
         bluetoothController = new BluetoothController();
         wiFiController = new WiFiController();
+        autoSyncController = new AutoSyncController();
 
     }
 
@@ -107,6 +109,7 @@ public class SettingsActivity extends ActionBarActivity {
         actionListContext.setPhase2Active(sw.isChecked());
 
         //test
-        wiFiController.disableWiFi(this);
+       // wiFiController.disableWiFi(this);
+        autoSyncController.disableAutoSync(getContentResolver());
     }
 }

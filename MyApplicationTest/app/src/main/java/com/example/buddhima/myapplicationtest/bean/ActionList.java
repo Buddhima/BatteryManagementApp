@@ -28,7 +28,6 @@ public class ActionList {
 
         phaseActions = new ArrayList<Action>();
         for (int i = 0; i < actionList.size(); i++) {
-            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + actionList.get(i));
             Action action = new Action(phase, i, actionList.get(i));
             phaseActions.add(action);
 

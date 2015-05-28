@@ -1,21 +1,13 @@
 package com.example.buddhima.myapplicationtest.settings;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
-import android.provider.MediaStore;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
@@ -48,14 +40,11 @@ public class SettingsActivity extends ActionBarActivity {
         LinearLayout layoutPhase2 = (LinearLayout) findViewById(R.id.linearPhase2);
         actionListContext = new ActionListContext(layoutPhase1, layoutPhase2);
 
-
         Switch sw1 = (Switch) findViewById(R.id.switchPhase1);
         Switch sw2 = (Switch) findViewById(R.id.switchPhase2);
 
         actionListContext.setPhase1Active(sw1.isChecked());
         actionListContext.setPhase2Active(sw2.isChecked());
-//        actionListContext.updateActionContext(layoutPhase1, layoutPhase2);
-        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         //controllers
         brightnessController = new BrightnessController(getContentResolver());
@@ -92,63 +81,40 @@ public class SettingsActivity extends ActionBarActivity {
     }
 
     public void onCheckboxClicked(View view) {
-        System.out.println("Clicked");
         CheckedTextView ctv = (CheckedTextView) view;
         String actionName = ctv.getText().toString();
-        System.out.println("<<<<<<<<<<<<<<<<<<<<" + actionName);
 
         if (ctv.isChecked())
             ctv.setChecked(false);
-
         else
             ctv.setChecked(true);
 
-        if(actionListContext.setActionStatus(actionName, ctv.isChecked()))
-        {
+        if (actionListContext.setActionStatus(actionName, ctv.isChecked())) {
+            //open the timeout popup
             screenTimeoutPopup.showPopup(this, actionListContext.getPopupLocation(), actionListContext.getTimeout());
         }
-
-
         //testing
-        brightnessController.setBrightness(getWindow(), getContentResolver(), brightnessController.getBrightness(getContentResolver()) + 25);
-
+//        brightnessController.setBrightness(getWindow(), getContentResolver(), brightnessController.getBrightness(getContentResolver()) + 25);
+//        bluetoothController.disableBluetooth();
+//        wiFiController.disableWiFi(this);
+//        autoSyncController.disableAutoSync(getContentResolver());
     }
 
     public void onSwitchPhase1Clicked(View view) {
 
         Switch sw = ((Switch) view);
         actionListContext.setPhase1Active(sw.isChecked());
-
-        //testing
-        //bluetoothController.disableBluetooth();
-//        screenTimeoutController.setTimeout(getContentResolver(), 5);
-
-
     }
 
     public void onSwitchPhase2Clicked(View view) {
         Switch sw = ((Switch) view);
         actionListContext.setPhase2Active(sw.isChecked());
-
-        //test
-        // wiFiController.disableWiFi(this);
-        //  autoSyncController.disableAutoSync(getContentResolver());
-
-
     }
 
 
     public void onRadioButtonClicked(View view) {
-
-        //screenTimeoutPopup.showPopup(this, new Point(0, 0));
-        RadioButton rb = (RadioButton) view;
-        int rbID = rb.getId();
-
-
-
         boolean checked = ((RadioButton) view).isChecked();
         int radioButtonLocation = -1;
-
         if (!checked)
             return;
 
@@ -182,16 +148,5 @@ public class SettingsActivity extends ActionBarActivity {
 
         actionListContext.setTimeout(radioButtonLocation);
 //        screenTimeoutController.setTimeout(getContentResolver(), radioButtonLocation);
-
-        System.out.println("onRadioButtonClicked <<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + radioButtonLocation);
-    }
-
-    public void onRadioGroupClicked(View view) {
-
-        //screenTimeoutPopup.showPopup(this, new Point(0, 0));
-        RadioGroup rg = (RadioGroup) view;
-        int rbID = rg.getCheckedRadioButtonId();
-
-        System.out.println("onRadioGroupClicked <<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + rbID);
     }
 }

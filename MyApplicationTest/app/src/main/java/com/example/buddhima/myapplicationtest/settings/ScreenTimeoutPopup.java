@@ -51,8 +51,6 @@ public class ScreenTimeoutPopup {
 
         checkRadioButton(radioButtonLocation);
 
-
-
         // Getting a reference to Close button, and close the popup when clicked.
         Button close = (Button) layout.findViewById(R.id.close);
         close.setOnClickListener(new View.OnClickListener() {
@@ -64,14 +62,14 @@ public class ScreenTimeoutPopup {
         });
     }
 
-    public void checkRadioButton( int rbID){
+    public void checkRadioButton(int rbID) {
 
         RadioButton radioButton = null;
         switch (rbID) {
             case 0:
                 radioButton = (RadioButton) layout.findViewById(R.id.radio_15s);
                 break;
-            case 1 :
+            case 1:
                 radioButton = (RadioButton) layout.findViewById(R.id.radio_30s);
                 break;
             case 2:

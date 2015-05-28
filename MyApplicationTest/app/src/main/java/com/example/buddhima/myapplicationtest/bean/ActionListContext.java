@@ -22,7 +22,6 @@ public class ActionListContext {
 
     LinearLayout layoutPhase1;
     LinearLayout layoutPhase2;
-
     //status
     private boolean isPhase1Active;
     private boolean isPhase2Active;
@@ -31,7 +30,6 @@ public class ActionListContext {
 
 
     public ActionListContext(LinearLayout layoutPhase1, LinearLayout layoutPhase2) {
-        System.out.println("ActionListContext<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         listContext = new ArrayList<ActionList>();
         listPhase1ActionName = new ArrayList<String>();
         listPhase2ActionName = new ArrayList<String>();
@@ -43,7 +41,6 @@ public class ActionListContext {
     }
 
     public void updateActionContext(LinearLayout layoutPhase1, LinearLayout layoutPhase2) {
-        System.out.println("updateActionContext<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         listContext.clear();
         listPhase1ActionName.clear();
         listPhase2ActionName.clear();
@@ -70,9 +67,7 @@ public class ActionListContext {
     }
 
 
-
     public void printActionContext() {
-        System.out.println("printActionContext<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         for (int i = 0; i < listContext.size(); i++) {
             ActionList actionList = listContext.get(i);
             for (int j = 0; j < actionList.getSize(); j++) {
@@ -90,14 +85,13 @@ public class ActionListContext {
                 if (actionName.equals(action.getName())) {
                     action.setChecked(isChecked);
 
-                    if(isChecked && actionName.equals("Screen Timeout"))
+                    if (isChecked && actionName.equals("Screen Timeout"))
                         return true;
 
                     break;
                 }
             }
         }
-
         printActionContext();
         return false;
     }
@@ -123,8 +117,53 @@ public class ActionListContext {
         }
     }
 
-    private void updatePhaseStatus(){
 
+    private void enableDisablePhase(boolean isChecked, LinearLayout layoutPhase) {
+        layoutPhase.getChildCount();
+        for (int i = 0; i < layoutPhase.getChildCount(); i++) {
+            CheckedTextView ctv = (CheckedTextView) layoutPhase.getChildAt(i);
+            ctv.setEnabled(isChecked);
+        }
+    }
+
+    private CheckedTextView getCheckedTextView(LinearLayout layoutPhase, String actionName) {
+        layoutPhase.getChildCount();
+        for (int i = 0; i < layoutPhase.getChildCount(); i++) {
+            CheckedTextView ctv = (CheckedTextView) layoutPhase.getChildAt(i);
+            if (actionName.equals(ctv.getText().toString())) {
+                return ctv;
+            }
+        }
+        return null;
+    }
+
+    public Point getPopupLocation() {
+        int[] location = new int[2];
+        CheckedTextView ctv = (CheckedTextView) getCheckedTextView(layoutPhase2, "Screen Timeout");
+
+        // Get the x, y location and store it in the location[] array
+        // location[0] = x, location[1] = y.
+        if (ctv == null)
+            return null;
+
+        ctv.getLocationOnScreen(location);
+
+        //Initialize the Point with x, and y positions
+        Point p = new Point();
+        p.x = location[0];
+        p.y = location[1];
+
+        return p;
+    }
+
+
+    //getters and setters
+    public int getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
     }
 
     public boolean isPhase1Active() {
@@ -143,51 +182,7 @@ public class ActionListContext {
     public void setPhase2Active(boolean isPhase2Active) {
         this.isPhase2Active = isPhase2Active;
         enableDisablePhase(isPhase2Active, layoutPhase2);
-
     }
 
-    private void enableDisablePhase(boolean isChecked, LinearLayout layoutPhase){
-        layoutPhase.getChildCount();
-        for (int i = 0; i < layoutPhase.getChildCount(); i++) {
-            CheckedTextView ctv = (CheckedTextView) layoutPhase.getChildAt(i);
-            ctv.setEnabled(isChecked);
-        }
-    }
 
-    public int getTimeout() {
-        return timeout;
-    }
-
-    public void setTimeout(int timeout) {
-        this.timeout = timeout;
-    }
-
-    private CheckedTextView getCheckedTextView(LinearLayout layoutPhase, String actionName ){
-        layoutPhase.getChildCount();
-        for (int i = 0; i < layoutPhase.getChildCount(); i++) {
-            CheckedTextView ctv = (CheckedTextView) layoutPhase.getChildAt(i);
-            if (actionName.equals(ctv.getText().toString())) {
-                return ctv;
-            }
-        }
-        return  null;
-    }
-    public Point getPopupLocation(){
-        int[] location = new int[2];
-        CheckedTextView ctv = (CheckedTextView) getCheckedTextView(layoutPhase2, "Screen Timeout");
-
-        // Get the x, y location and store it in the location[] array
-        // location[0] = x, location[1] = y.
-        if (ctv == null)
-            return null;
-
-        ctv.getLocationOnScreen(location);
-
-        //Initialize the Point with x, and y positions
-        Point p = new Point();
-        p.x = location[0];
-        p.y = location[1];
-
-        return p;
-    }
 }

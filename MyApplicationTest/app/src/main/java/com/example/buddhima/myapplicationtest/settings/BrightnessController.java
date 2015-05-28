@@ -1,25 +1,10 @@
 package com.example.buddhima.myapplicationtest.settings;
 
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.ContentResolver;
-import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
-import android.util.Log;
-import android.view.Window;
-import android.view.WindowManager;
-
-import android.app.Activity;
-import android.content.ContentResolver;
-import android.os.Bundle;
-import android.provider.Settings.SettingNotFoundException;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
 
 
 /**

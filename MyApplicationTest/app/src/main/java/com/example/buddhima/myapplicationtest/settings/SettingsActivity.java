@@ -17,6 +17,9 @@ public class SettingsActivity extends ActionBarActivity {
 
     ActionListContext actionListContext;
 
+    //Controllers
+    BrightnessController brightnessController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,9 @@ public class SettingsActivity extends ActionBarActivity {
         actionListContext.setPhase2Active(sw2.isChecked());
 //        actionListContext.updateActionContext(layoutPhase1, layoutPhase2);
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+        //controllers
+        brightnessController = new BrightnessController(getContentResolver());
 
     }
 
@@ -75,15 +81,18 @@ public class SettingsActivity extends ActionBarActivity {
 
         actionListContext.setActionStatus(actionName, ctv.isChecked());
 
+        brightnessController.setBrightness(getWindow(), getContentResolver(), brightnessController.getBrightness(getContentResolver()) + 25);
+
     }
+
     public void onSwitchPhase1Clicked(View view) {
-        Switch sw = ((Switch)view);
+        Switch sw = ((Switch) view);
         actionListContext.setPhase1Active(sw.isChecked());
 
     }
 
     public void onSwitchPhase2Clicked(View view) {
-        Switch sw = ((Switch)view);
+        Switch sw = ((Switch) view);
         actionListContext.setPhase2Active(sw.isChecked());
     }
 }

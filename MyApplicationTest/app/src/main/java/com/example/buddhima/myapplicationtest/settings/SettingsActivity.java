@@ -1,12 +1,23 @@
 package com.example.buddhima.myapplicationtest.settings;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import com.example.buddhima.myapplicationtest.R;
@@ -23,6 +34,9 @@ public class SettingsActivity extends ActionBarActivity {
     WiFiController wiFiController;
     AutoSyncController autoSyncController;
     ScreenTimeoutController screenTimeoutController;
+
+    //popup
+    ScreenTimeoutPopup screenTimeoutPopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +63,8 @@ public class SettingsActivity extends ActionBarActivity {
         wiFiController = new WiFiController();
         autoSyncController = new AutoSyncController();
         screenTimeoutController = new ScreenTimeoutController();
+
+        screenTimeoutPopup = new ScreenTimeoutPopup();
 
     }
 
@@ -87,7 +103,11 @@ public class SettingsActivity extends ActionBarActivity {
         else
             ctv.setChecked(true);
 
-        actionListContext.setActionStatus(actionName, ctv.isChecked());
+        if(actionListContext.setActionStatus(actionName, ctv.isChecked()))
+        {
+            screenTimeoutPopup.showPopup(this, actionListContext.getPopupLocation(), actionListContext.getTimeout());
+        }
+
 
         //testing
         brightnessController.setBrightness(getWindow(), getContentResolver(), brightnessController.getBrightness(getContentResolver()) + 25);
@@ -101,8 +121,7 @@ public class SettingsActivity extends ActionBarActivity {
 
         //testing
         //bluetoothController.disableBluetooth();
-        screenTimeoutController.setTimeout(getContentResolver(),0);
-
+//        screenTimeoutController.setTimeout(getContentResolver(), 5);
 
 
     }
@@ -112,7 +131,67 @@ public class SettingsActivity extends ActionBarActivity {
         actionListContext.setPhase2Active(sw.isChecked());
 
         //test
-       // wiFiController.disableWiFi(this);
-        autoSyncController.disableAutoSync(getContentResolver());
+        // wiFiController.disableWiFi(this);
+        //  autoSyncController.disableAutoSync(getContentResolver());
+
+
+    }
+
+
+    public void onRadioButtonClicked(View view) {
+
+        //screenTimeoutPopup.showPopup(this, new Point(0, 0));
+        RadioButton rb = (RadioButton) view;
+        int rbID = rb.getId();
+
+
+
+        boolean checked = ((RadioButton) view).isChecked();
+        int radioButtonLocation = -1;
+
+        if (!checked)
+            return;
+
+        // Check which radio button was clicked
+        switch (view.getId()) {
+            case R.id.radio_15s:
+                radioButtonLocation = 0;
+
+                break;
+            case R.id.radio_30s:
+                radioButtonLocation = 1;
+
+                break;
+            case R.id.radio_1m:
+                radioButtonLocation = 2;
+
+                break;
+            case R.id.radio_2m:
+                radioButtonLocation = 3;
+
+                break;
+            case R.id.radio_10m:
+                radioButtonLocation = 4;
+
+                break;
+            case R.id.radio_30m:
+                radioButtonLocation = 5;
+
+                break;
+        }
+
+        actionListContext.setTimeout(radioButtonLocation);
+//        screenTimeoutController.setTimeout(getContentResolver(), radioButtonLocation);
+
+        System.out.println("onRadioButtonClicked <<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + radioButtonLocation);
+    }
+
+    public void onRadioGroupClicked(View view) {
+
+        //screenTimeoutPopup.showPopup(this, new Point(0, 0));
+        RadioGroup rg = (RadioGroup) view;
+        int rbID = rg.getCheckedRadioButtonId();
+
+        System.out.println("onRadioGroupClicked <<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + rbID);
     }
 }

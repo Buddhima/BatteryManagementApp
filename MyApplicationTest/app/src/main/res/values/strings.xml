@@ -36,5 +36,14 @@
     <string name="settings_section3_action5">Action 05</string>
     <string name="settings_section3_action6">Action 06</string>
 
+    <!--Settings Activity Timeout-->
+    <string name="timeout_15s">15 seconds</string>
+    <string name="timeout_30s">15 seconds</string>
+    <string name="timeout_1m">1 minute</string>
+    <string name="timeout_2m">2 minutes</string>
+    <string name="timeout_10m">10 minutes</string>
+    <string name="timeout_30m">30 minutes</string>
+
+
 
 </resources>

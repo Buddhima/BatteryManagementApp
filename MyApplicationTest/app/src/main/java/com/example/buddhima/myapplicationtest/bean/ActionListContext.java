@@ -1,5 +1,6 @@
 package com.example.buddhima.myapplicationtest.bean;
 
+import android.graphics.Point;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
@@ -25,6 +26,8 @@ public class ActionListContext {
     //status
     private boolean isPhase1Active;
     private boolean isPhase2Active;
+
+    private int timeout;
 
 
     public ActionListContext(LinearLayout layoutPhase1, LinearLayout layoutPhase2) {
@@ -79,19 +82,24 @@ public class ActionListContext {
         }
     }
 
-    public void setActionStatus(String actionName, boolean isChecked) {
+    public boolean setActionStatus(String actionName, boolean isChecked) {
         for (int i = 0; i < listContext.size(); i++) {
             ActionList actionList = listContext.get(i);
             for (int j = 0; j < actionList.getSize(); j++) {
                 Action action = actionList.getAction(j);
                 if (actionName.equals(action.getName())) {
                     action.setChecked(isChecked);
+
+                    if(isChecked && actionName.equals("Screen Timeout"))
+                        return true;
+
                     break;
                 }
             }
         }
 
         printActionContext();
+        return false;
     }
 
     public boolean getActionStatus(String actionName) {
@@ -144,5 +152,42 @@ public class ActionListContext {
             CheckedTextView ctv = (CheckedTextView) layoutPhase.getChildAt(i);
             ctv.setEnabled(isChecked);
         }
+    }
+
+    public int getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
+
+    private CheckedTextView getCheckedTextView(LinearLayout layoutPhase, String actionName ){
+        layoutPhase.getChildCount();
+        for (int i = 0; i < layoutPhase.getChildCount(); i++) {
+            CheckedTextView ctv = (CheckedTextView) layoutPhase.getChildAt(i);
+            if (actionName.equals(ctv.getText().toString())) {
+                return ctv;
+            }
+        }
+        return  null;
+    }
+    public Point getPopupLocation(){
+        int[] location = new int[2];
+        CheckedTextView ctv = (CheckedTextView) getCheckedTextView(layoutPhase2, "Screen Timeout");
+
+        // Get the x, y location and store it in the location[] array
+        // location[0] = x, location[1] = y.
+        if (ctv == null)
+            return null;
+
+        ctv.getLocationOnScreen(location);
+
+        //Initialize the Point with x, and y positions
+        Point p = new Point();
+        p.x = location[0];
+        p.y = location[1];
+
+        return p;
     }
 }

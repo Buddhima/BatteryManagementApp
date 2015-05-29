@@ -4,24 +4,29 @@ import android.graphics.Point;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 
 /**
  * Created by sunethe on 5/28/2015.
  */
 
+import com.example.buddhima.myapplicationtest.Globals;
 import com.example.buddhima.myapplicationtest.R;
 
 import java.util.ArrayList;
 
 public class ActionListContext {
 
-    ArrayList<String> listPhase1ActionName;
-    ArrayList<String> listPhase2ActionName;
-    ArrayList<ActionList> listContext;
+    public ArrayList<String> listPhase1ActionName;
+    public ArrayList<String> listPhase2ActionName;
+    public ArrayList<ActionList> listContext;
 
-    LinearLayout layoutPhase1;
-    LinearLayout layoutPhase2;
+    public LinearLayout layoutPhase1;
+    public LinearLayout layoutPhase2;
+
+    Switch sw1;
+    Switch sw2;
     //status
     private boolean isPhase1Active;
     private boolean isPhase2Active;
@@ -29,14 +34,23 @@ public class ActionListContext {
     private int timeout;
 
 
-    public ActionListContext(LinearLayout layoutPhase1, LinearLayout layoutPhase2) {
+    public ActionListContext() {
+
+    }
+
+    public ActionListContext(LinearLayout layoutPhase1, LinearLayout layoutPhase2, Switch sw1, Switch sw2) {
         listContext = new ArrayList<ActionList>();
         listPhase1ActionName = new ArrayList<String>();
         listPhase2ActionName = new ArrayList<String>();
         this.layoutPhase1 = layoutPhase1;
         this.layoutPhase2 = layoutPhase2;
 
+        this.sw1 = sw1;
+        this.sw2 = sw2;
+
         updateActionContext(layoutPhase1, layoutPhase2);
+        setPhase1Active(sw1.isChecked());
+        setPhase2Active(sw2.isChecked());
 
     }
 
@@ -182,6 +196,41 @@ public class ActionListContext {
     public void setPhase2Active(boolean isPhase2Active) {
         this.isPhase2Active = isPhase2Active;
         enableDisablePhase(isPhase2Active, layoutPhase2);
+    }
+
+    public void updateUI() {
+
+        System.out.println("UPDATING <<<<<<<<<<<<<<<<<<");
+        for (int i = 0; i < listContext.size(); i++) {
+            ActionList actionList = listContext.get(i);
+            for (int j = 0; j < actionList.getSize(); j++) {
+                Action action = actionList.getAction(j);
+                action.setChecked(Globals.arrayActionStatus[i][j]);     //update the context object
+
+                System.out.println("NAME : " + action.getName() + "Status : " + action.isChecked());
+                if (i == 0) {
+                    getCheckedTextView(layoutPhase1, action.getName()).setChecked(Globals.arrayActionStatus[i][j]);
+                } else if (i == 1) {
+                    getCheckedTextView(layoutPhase2, action.getName()).setChecked(Globals.arrayActionStatus[i][j]);
+                }
+
+                System.out.println("STTUS GLOABL : "+ Globals.arrayActionStatus[i][j]);
+
+            }
+        }
+
+        sw1.setChecked(Globals.isPhase1Active);
+        sw2.setChecked(Globals.isPhase2Active);
+
+        setPhase1Active(Globals.isPhase1Active);
+        setPhase2Active(Globals.isPhase2Active);
+
+        timeout = Globals.timeout;
+
+//        updateActionContext(layoutPhase1, layoutPhase2);
+//
+
+
     }
 
 

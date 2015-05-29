@@ -31,13 +31,22 @@ public class BrightnessController {
     }
 
     public void setBrightness(Window window, ContentResolver cResolver, int brightness) {
-        if (brightness > MAX_BRIGHTNESS)
-            brightness = MAX_BRIGHTNESS;
 
-        android.provider.Settings.System.putInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS, brightness);
-        LayoutParams layoutpars = window.getAttributes();
-        layoutpars.screenBrightness = (float) brightness;
-        window.setAttributes(layoutpars);
+        try {
+            if (brightness > MAX_BRIGHTNESS)
+                brightness = MAX_BRIGHTNESS;
+
+            if (brightness < -10) {
+                brightness = MAX_BRIGHTNESS;
+            }
+
+            android.provider.Settings.System.putInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS, brightness);
+            LayoutParams layoutpars = window.getAttributes();
+            layoutpars.screenBrightness = (float) brightness;
+            window.setAttributes(layoutpars);
+        }catch (Exception ex){
+            return;
+        }
     }
 
 }

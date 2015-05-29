@@ -18,11 +18,11 @@
     <string name="settings_section3_name">Phase 03</string>
 
     <string name="settings_section1_action1">WiFi</string>
-    <string name="settings_section1_action2">Bluetooth</string>
+    <string name="settings_section1_action2">Bluetooth1</string>
     <string name="settings_section1_action3">Brightness</string>
 
 
-    <string name="settings_section2_action1">Bluetooth</string>
+    <string name="settings_section2_action1">Bluetooth2</string>
     <string name="settings_section2_action2">Screen Timeout</string>
     <string name="settings_section2_action3">Auto-Sync</string>
     <string name="settings_section2_action4">Action 04</string>

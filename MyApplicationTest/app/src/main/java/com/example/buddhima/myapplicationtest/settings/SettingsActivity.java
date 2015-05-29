@@ -9,9 +9,10 @@ import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Switch;
+import android.widget.Toast;
 
+import com.example.buddhima.myapplicationtest.Globals;
 import com.example.buddhima.myapplicationtest.R;
 import com.example.buddhima.myapplicationtest.bean.ActionListContext;
 
@@ -36,24 +37,37 @@ public class SettingsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_settings);
 
         //create actionListContext
+
+
         LinearLayout layoutPhase1 = (LinearLayout) findViewById(R.id.linearPhase1);
         LinearLayout layoutPhase2 = (LinearLayout) findViewById(R.id.linearPhase2);
-        actionListContext = new ActionListContext(layoutPhase1, layoutPhase2);
-
         Switch sw1 = (Switch) findViewById(R.id.switchPhase1);
         Switch sw2 = (Switch) findViewById(R.id.switchPhase2);
 
-        actionListContext.setPhase1Active(sw1.isChecked());
-        actionListContext.setPhase2Active(sw2.isChecked());
+        actionListContext = new ActionListContext(layoutPhase1, layoutPhase2, sw1, sw2);
+
+
+
+//        actionListContext.setPhase1Active(sw1.isChecked());
+//        actionListContext.setPhase2Active(sw2.isChecked());
 
         //controllers
-        brightnessController = new BrightnessController(getContentResolver());
-        bluetoothController = new BluetoothController();
-        wiFiController = new WiFiController();
-        autoSyncController = new AutoSyncController();
-        screenTimeoutController = new ScreenTimeoutController();
+//        brightnessController = new BrightnessController(getContentResolver());
+//        bluetoothController = new BluetoothController();
+//        wiFiController = new WiFiController();
+//        autoSyncController = new AutoSyncController();
+//        screenTimeoutController = new ScreenTimeoutController();
 
         screenTimeoutPopup = new ScreenTimeoutPopup();
+
+        //set the global object
+
+        if (Globals.actionListContext != null){
+            actionListContext.updateUI();
+
+        }
+        Globals.actionListContext = actionListContext;
+        Globals.updateGlobalStatus();
 
     }
 
@@ -98,17 +112,25 @@ public class SettingsActivity extends ActionBarActivity {
 //        bluetoothController.disableBluetooth();
 //        wiFiController.disableWiFi(this);
 //        autoSyncController.disableAutoSync(getContentResolver());
+        Globals.actionListContext = actionListContext;
+        Globals.updateGlobalStatus();
     }
 
     public void onSwitchPhase1Clicked(View view) {
 
         Switch sw = ((Switch) view);
         actionListContext.setPhase1Active(sw.isChecked());
+
+        Globals.actionListContext = actionListContext;
+        Globals.updateGlobalStatus();
     }
 
     public void onSwitchPhase2Clicked(View view) {
         Switch sw = ((Switch) view);
         actionListContext.setPhase2Active(sw.isChecked());
+
+        Globals.actionListContext = actionListContext;
+        Globals.updateGlobalStatus();
     }
 
 
@@ -148,5 +170,24 @@ public class SettingsActivity extends ActionBarActivity {
 
         actionListContext.setTimeout(radioButtonLocation);
 //        screenTimeoutController.setTimeout(getContentResolver(), radioButtonLocation);
+//        screenTimeoutController.setTimeout(getContentResolver(), Globals.timeout);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Toast.makeText(this, "Screen timeout set", Toast.LENGTH_LONG).show();
+
+        Globals.actionListContext = actionListContext;
+        Globals.updateGlobalStatus();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        System.out.println("onBackPressed <<<<<<<<<<<<<");
+        Globals.actionListContext = actionListContext;
+        Globals.updateGlobalStatus();
     }
 }

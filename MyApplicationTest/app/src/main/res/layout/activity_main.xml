@@ -21,7 +21,8 @@
         android:id="@+id/switch1"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="97dp" />
+        android:layout_marginTop="97dp"
+        android:onClick="onEnableButtonClicked"/>
 
     <!--<Button
         android:layout_width="wrap_content"

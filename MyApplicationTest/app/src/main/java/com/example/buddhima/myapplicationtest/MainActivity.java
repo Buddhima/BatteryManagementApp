@@ -40,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
     ActionBarActivity actionBarActivity;
 
     static Switch enablingSwitch;
+    private static Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         actionBarActivity = this;
+        enablingSwitch = (Switch) findViewById(R.id.switch1);
 
         Globals.cResolver = getContentResolver();
         setBatteryLevel();
@@ -180,7 +182,7 @@ public class MainActivity extends ActionBarActivity {
                     //testing
                     if (Globals.arrayActionStatus[0][0]) {
                         wiFiController.disableWiFi(this);
-                       showToast("WiFi Switched off");
+                        showToast("WiFi Switched off");
 
                     }
                     if (Globals.arrayActionStatus[0][1]) {
@@ -202,7 +204,7 @@ public class MainActivity extends ActionBarActivity {
 
                     }
                     if (Globals.arrayActionStatus[1][1]) {
-                         screenTimeoutController.setTimeout(getContentResolver(), Globals.timeout);
+                        screenTimeoutController.setTimeout(getContentResolver(), Globals.timeout);
                         showToast("Screen timeout set");
 
                     }
@@ -226,28 +228,29 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    public void showToast(final String toast)
-    {
+    public void showToast(final String toast) {
         runOnUiThread(new Runnable() {
-            public void run()
-            {
+            public void run() {
                 Toast.makeText(actionBarActivity, toast, Toast.LENGTH_SHORT).show();
             }
         });
         sleep();
     }
 
-    public void onEnableButtonClicked(View view){
-        Switch sw = (Switch)view;
+    public void onEnableButtonClicked(View view) {
+        Switch sw = (Switch) view;
         Globals.isAllEnabled = sw.isChecked();
-        if (Globals.isAllEnabled){
+        if (Globals.isAllEnabled) {
+
             Toast.makeText(actionBarActivity, "App Enabled", Toast.LENGTH_SHORT).show();
 
-        }else{
+        } else {
             Toast.makeText(actionBarActivity, "App Disabled", Toast.LENGTH_SHORT).show();
 
-        }
 
+        }
+        sw.setChecked(Globals.isAllEnabled);
+        sw.setPressed(Globals.isAllEnabled);
 
     }
 
@@ -256,6 +259,18 @@ public class MainActivity extends ActionBarActivity {
     public boolean onNavigateUpFromChild(Activity child) {
         System.out.println("CHILD ><<<<<<<<<<<<<<<<<<");
         return true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        bundle.putBoolean("ToggleButtonState", enablingSwitch.isChecked());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onPause();
+        enablingSwitch.setChecked(bundle.getBoolean("ToggleButtonState",false));
     }
 }
 
